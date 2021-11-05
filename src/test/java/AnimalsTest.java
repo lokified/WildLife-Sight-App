@@ -58,4 +58,32 @@ public class AnimalsTest {
         assertEquals(true,Animals.all().get(0).equals(testAnimal));
         assertEquals(true,Animals.all().get(1).equals(testAnotherAnimal));
     }
+
+    @Test
+    public void find_returnsAnimalsWithSameId_secondAnimal() {
+        Animals testAnimal = new Animals("Lion",1);
+        testAnimal.save();
+        Animals secondAnimal = new Animals("Snake",2);
+        secondAnimal.save();
+        assertEquals(Animals.find(secondAnimal.getId()),secondAnimal);
+    }
+
+    @Test
+    public void update_changesNameAndType() {
+        String initialName = "Lion";
+        Animals testAnimal = new Animals("Lion",1);
+        testAnimal.save();
+
+        testAnimal.update(testAnimal.getId(),"Snake",1);
+        Animals updatedAnimal = Animals.find(testAnimal.getId());
+        assertNotEquals(initialName,updatedAnimal.getName());
+    }
+
+    @Test
+    public void delete_deletesAnimal_true() {
+        Animals testAnimal = new Animals("Lion",1);
+        testAnimal.save();
+        testAnimal.delete();
+        assertEquals(null,Animals.find(testAnimal.getId()));
+    }
 }

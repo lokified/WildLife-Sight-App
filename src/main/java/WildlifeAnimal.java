@@ -43,4 +43,13 @@ public abstract class WildlifeAnimal {
                     .getKey();
         }
     }
+
+    public void delete(){
+        try (Connection conn = DB.sql2o.open()){
+            String sql = "DELETE FROM animals WHERE id = :id";
+            conn.createQuery(sql)
+                    .addParameter("id",this.id)
+                    .executeUpdate();
+        }
+    }
 }
