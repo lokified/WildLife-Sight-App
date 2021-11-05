@@ -20,6 +20,17 @@ public class Animals extends WildlifeAnimal  implements DatabaseManagement{
           .executeAndFetch(Animals.class);
         }
     }
+    public void save() {
+        try(Connection conn = DB.sql2o.open()) {
+            String sql = "INSERT INTO animals (name,sightingId,type) VALUES (:name, :sightingId, :type)";
+            this.id = (int) conn.createQuery(sql,true)
+                    .addParameter("name",this.name)
+                    .addParameter("sightingId",this.sightingId)
+                    .addParameter("type",this.type)
+                    .executeUpdate()
+                    .getKey();
+        }
+    }
 
     public void update(int id, String newName, int newSightingId) {
         String sql = "UPDATE animals SET (name,sightingId) = (:name, :sightingId) WHERE id = :id";

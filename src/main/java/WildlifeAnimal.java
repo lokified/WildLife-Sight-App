@@ -32,17 +32,7 @@ public abstract class WildlifeAnimal {
                 Objects.equals(type, that.type);
     }
 
-    public void save() {
-        try(Connection conn = DB.sql2o.open()) {
-            String sql = "INSERT INTO animals (name,sightingId,type) VALUES (:name, :sightingId, :type)";
-            this.id = (int) conn.createQuery(sql,true)
-                    .addParameter("name",this.name)
-                    .addParameter("sightingId",this.sightingId)
-                    .addParameter("type",this.type)
-                    .executeUpdate()
-                    .getKey();
-        }
-    }
+
 
     public void delete(){
         try (Connection conn = DB.sql2o.open()){
