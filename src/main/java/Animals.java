@@ -9,10 +9,11 @@ public class Animals extends WildlifeAnimal  implements DatabaseManagement{
     public Animals(String name, int sightingId) {
         this.name = name;
         this.sightingId = sightingId;
+        type = DATABASE_TYPE;
     }
 
     public static List<Animals> all() {
-        String sql = "SELECT * FROM animals";
+        String sql = "SELECT * FROM animals WHERE type = 'Not-endangered'";
         try (Connection conn = DB.sql2o.open()){
           return conn.createQuery(sql)
                   .throwOnMappingFailure(false)
