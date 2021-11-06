@@ -74,4 +74,23 @@ public class SightingTest {
         testAnotherSight.save();
         assertEquals(Sighting.find(testAnotherSight.getId()),testAnotherSight);
     }
+
+    @Test
+    public void update_changesAnimalIdLocationAndRangerName() {
+        String initialLocation = "Zone A";
+        Sighting testSight = new Sighting(1,"Zone A","Songyam");
+        testSight.save();
+
+        testSight.update(testSight.getId(),2,"Zone B","Cho");
+        Sighting updatedSight = Sighting.find(testSight.getId());
+        assertNotEquals(initialLocation,updatedSight.getLocation());
+    }
+
+    @Test
+    public void delete_deletesSIGHTINGS_true() {
+        Sighting testSight = new Sighting(1,"Zone A","Songyam");
+        testSight.save();
+        testSight.delete();
+        assertEquals(null,Sighting.find(testSight.getId()));
+    }
 }

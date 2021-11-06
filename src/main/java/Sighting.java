@@ -82,4 +82,25 @@ public class Sighting {
             return sighting;
         }
     }
+
+    public void update(int id, int newAnimal_id, String newLocation, String newRangerName) {
+        String sql = "UPDATE sightings SET (animal_Id,location,rangerName) = (:animal_Id, :location, :rangerName) WHERE id = :id";
+        try(Connection conn = DB.sql2o.open()) {
+            conn.createQuery(sql)
+                    .addParameter("animal_Id",newAnimal_id)
+                    .addParameter("location",newLocation)
+                    .addParameter("rangerName",newRangerName)
+                    .addParameter("id",id)
+                    .executeUpdate();
+        }
+    }
+
+    public void delete(){
+        try (Connection conn = DB.sql2o.open()){
+            String sql = "DELETE FROM sightings WHERE id = :id";
+            conn.createQuery(sql)
+                    .addParameter("id",this.id)
+                    .executeUpdate();
+        }
+    }
 }
