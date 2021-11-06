@@ -13,7 +13,7 @@ public class EndangeredAnimals extends WildlifeAnimal implements DatabaseManagem
         this.name = name;
         this.health = health;
         this.age = age;
-        this.sightingId = sightingId;
+        this.sighting_Id = sighting_Id;
         type = DATABASE_TYPE;
     }
 
@@ -44,10 +44,10 @@ public class EndangeredAnimals extends WildlifeAnimal implements DatabaseManagem
 
     public void save() {
         try(Connection conn = DB.sql2o.open()) {
-           String sql = "INSERT INTO animals (name,sightingId, type, health, age) VALUES (:name, :sightingId, :type, :health, :age)";
+           String sql = "INSERT INTO animals (name,sighting_Id, type, health, age) VALUES (:name, :sighting_Id, :type, :health, :age)";
            this.id = (int) conn.createQuery(sql,true)
                    .addParameter("name",this.name)
-                   .addParameter("sightingId",this.sightingId)
+                   .addParameter("sighting_Id",this.sighting_Id)
                    .addParameter("type",this.type)
                    .addParameter("health",this.health)
                    .addParameter("age",this.age)

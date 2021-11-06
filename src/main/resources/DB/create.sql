@@ -1,4 +1,5 @@
 CREATE DATABASE wildlife_tracker;
 \c wildlife_tracker;
-CREATE TABLE animals (id SERIAL PRIMARY KEY, name VARCHAR, sightingId INT, type VARCHAR, health VARCHAR, age VARCHAR);
+CREATE TABLE animals (id SERIAL PRIMARY KEY, name VARCHAR, sighting_Id INT, type VARCHAR, health VARCHAR, age VARCHAR);
+CREATE TABLE sightings (id SERIAL PRIMARY KEY, animal_Id int, location VARCHAR, rangerName VARCHAR, timeSeen TIMESTAMP);
 CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;

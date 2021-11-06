@@ -6,9 +6,9 @@ public class Animals extends WildlifeAnimal  implements DatabaseManagement{
 
     public static final String DATABASE_TYPE = "Not-endangered";
 
-    public Animals(String name, int sightingId) {
+    public Animals(String name, int sighting_Id) {
         this.name = name;
-        this.sightingId = sightingId;
+        this.sighting_Id = sighting_Id;
         type = DATABASE_TYPE;
     }
 
@@ -22,22 +22,22 @@ public class Animals extends WildlifeAnimal  implements DatabaseManagement{
     }
     public void save() {
         try(Connection conn = DB.sql2o.open()) {
-            String sql = "INSERT INTO animals (name,sightingId,type) VALUES (:name, :sightingId, :type)";
+            String sql = "INSERT INTO animals (name,sighting_Id,type) VALUES (:name, :sighting_Id, :type)";
             this.id = (int) conn.createQuery(sql,true)
                     .addParameter("name",this.name)
-                    .addParameter("sightingId",this.sightingId)
+                    .addParameter("sighting_Id",this.sighting_Id)
                     .addParameter("type",this.type)
                     .executeUpdate()
                     .getKey();
         }
     }
 
-    public void update(int id, String newName, int newSightingId) {
-        String sql = "UPDATE animals SET (name,sightingId) = (:name, :sightingId) WHERE id = :id";
+    public void update(int id, String newName, int newSighting_Id) {
+        String sql = "UPDATE animals SET (name,sighting_Id) = (:name, :sighting_Id) WHERE id = :id";
         try(Connection conn = DB.sql2o.open()) {
             conn.createQuery(sql)
                     .addParameter("name",newName)
-                    .addParameter("sightingId",newSightingId)
+                    .addParameter("sighting_Id",newSighting_Id)
                     .addParameter("id",id)
                     .executeUpdate();
         }

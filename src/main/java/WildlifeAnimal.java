@@ -4,7 +4,7 @@ import java.util.Objects;
 public abstract class WildlifeAnimal {
 
     public String name;
-    public int sightingId;
+    public int sighting_Id;
     public int id;
 
     public String type;
@@ -13,8 +13,8 @@ public abstract class WildlifeAnimal {
         return name;
     }
 
-    public int getSightingId() {
-        return sightingId;
+    public int getSighting_Id() {
+        return sighting_Id;
     }
 
     public int getId() {
@@ -26,7 +26,7 @@ public abstract class WildlifeAnimal {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WildlifeAnimal that = (WildlifeAnimal) o;
-        return sightingId == that.sightingId &&
+        return sighting_Id == that.sighting_Id &&
                 id == that.id &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(type, that.type);

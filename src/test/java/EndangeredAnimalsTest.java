@@ -27,7 +27,7 @@ public class EndangeredAnimalsTest {
     @Test
     public void EndangeredAnimals_getsSightingIdCorrectly_1() {
         EndangeredAnimals testEndangeredAnimals = new EndangeredAnimals("White Rhino","healthy","adult",1);
-        assertEquals(1,testEndangeredAnimals.getSightingId());
+        assertEquals(1,testEndangeredAnimals.getSighting_Id());
     }
 
     @Test

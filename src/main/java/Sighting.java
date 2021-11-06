@@ -1,4 +1,5 @@
-import java.sql.Timestamp;
+import org.sql2o.Connection;import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 public class Sighting {
@@ -48,8 +49,37 @@ public class Sighting {
                 Objects.equals(timeSeen, sighting.timeSeen);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(animal_Id, location, rangerName, id, timeSeen);
+
+
+    public static List<Sighting> all() {
+        String sql = "SELECT * FROM sightings;";
+        try (Connection conn = DB.sql2o.open()){
+            return conn.createQuery(sql)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(Sighting.class);
+        }
+    }
+
+    public void save() {
+        try(Connection conn = DB.sql2o.open()) {
+            String sql = "INSERT INTO sightings (animal_Id, location, rangerName) VALUES (:animal_Id, :location, :rangerName);  ";
+            this.id = (int) conn.createQuery(sql,true)
+                    .addParameter("animal_Id",this.animal_Id)
+                    .addParameter("location",this.location)
+                    .addParameter("rangerName",this.rangerName)
+                    .executeUpdate()
+                    .getKey();
+
+        }
+    }
+
+    public static Sighting find(int id) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM sightings where id =:id";
+            Sighting sighting = con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Sighting.class);
+            return sighting;
+        }
     }
 }

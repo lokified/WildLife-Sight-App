@@ -24,7 +24,7 @@ public class AnimalsTest {
     @Test
     public void Animals_getsSightingIdCorrectly_1() {
         Animals testAnimal = new Animals("Lion",1);
-        assertEquals(1,testAnimal.getSightingId());
+        assertEquals(1,testAnimal.getSighting_Id());
     }
 
     @Test
