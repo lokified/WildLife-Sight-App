@@ -1,0 +1,19 @@
+{{#partial "content"}}
+
+    <h3>Sightings</h3>
+    {{#each sightings}}
+        <div class="border border-1 p-3 m-2">
+
+            <p>Animal Id : {{animalId}}</p>
+            <p>Location : {{location}}</p>
+            <p>Ranger Name : {{rangerName}}</p>
+        </div>
+    {{/each}}
+
+
+    <a href="/en-animal-form" class="btn btn-success btn-sm">Add endangered animal</a>
+    <a href="/animal-form" class="btn btn-success btn-sm">Add animal</a>
+
+
+{{/partial}}
+{{> layout.hbs}}

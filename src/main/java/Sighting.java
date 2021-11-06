@@ -104,12 +104,4 @@ public class Sighting implements DatabaseManagement{
         }
     }
 
-    public static List<Sighting> allByAnimals (int animal_Id) {
-        try (Connection conn = DB.sql2o.open()){
-            String sql = "SELECT * FROM sightings WHERE animal_Id = :animal_Id";
-            return conn.createQuery(sql)
-                    .addParameter("animal_Id",animal_Id)
-                    .executeAndFetch(Sighting.class);
-        }
-    }
 }

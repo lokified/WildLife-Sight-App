@@ -61,7 +61,40 @@ public class App {
             Map<String,Object> model = new HashMap<String, Object>();
             List<Animals> allAnimals = Animals.all();
             model.put("animals",allAnimals);
+            List<EndangeredAnimals> allEnAnimals = EndangeredAnimals.all();
+            model.put("enAnimals",allEnAnimals);
             return new ModelAndView(model,"animal.hbs");
         }, new HandlebarsTemplateEngine());
+
+
+        //show form to add sightings
+        get("/sighting-form",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            List<Animals> all = Animals.allAnimals();
+            model.put("animals",all);
+            return new ModelAndView(model,"sighting-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //process sighting form
+        post("/sighting-form/new",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            int animalId = Integer.parseInt(request.queryParams("animal"));
+            String location = request.queryParams("location");
+            String rangerName = request.queryParams("rangerName");
+
+            Sighting sighting = new Sighting(animalId, location, rangerName);
+            sighting.save();
+            model.put("sightings",sighting);
+            return new ModelAndView(model,"success.hbs");
+
+        }, new HandlebarsTemplateEngine());
+
+        //show sightings
+        get("/sightings", (request, response) ->{
+            Map<String,Object> model = new HashMap<String, Object>();
+            List<Sighting> allSightings = Sighting.all();
+            model.put("sightings",allSightings);
+            return new ModelAndView(model,"sightings.hbs");
+        }, new HandlebarsTemplateEngine() );
     }
 }

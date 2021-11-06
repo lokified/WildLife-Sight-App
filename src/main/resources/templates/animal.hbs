@@ -3,11 +3,28 @@
 
     <h3>Animals</h3>
     {{#each animals}}
-        <p>{{name}}</p>
+        <div class="border border-1 p-3 m-2">
+             <h1>{{name}}</h1>
+            <p class="text-info">{{type}}</p>
+        </div>
+    {{/each}}
+
+    {{#each enAnimals}}
+        <div class="border border-1 p-3 m-2">
+            <h1>{{name}}</h1>
+            <p>Age:{{age}}</p>
+            <p>Health:{{health}}</p>
+            <p class="text-info">{{type}}</p>
+
+        </div>
+
+
     {{/each}}
 
 
     <a href="/en-animal-form" class="btn btn-success btn-sm">Add endangered animal</a>
+    <a href="/animal-form" class="btn btn-success btn-sm">Add animal</a>
+
 
 {{/partial}}
 {{> layout.hbs}}

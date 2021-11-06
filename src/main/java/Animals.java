@@ -41,4 +41,13 @@ public class Animals extends WildlifeAnimal  implements DatabaseManagement{
             return animal;
         }
     }
+
+
+    public static List<Animals> allAnimals() {
+        try (Connection conn = DB.sql2o.open()){
+            String sql = "SELECT name FROM animals";
+            return conn.createQuery(sql)
+                    .executeAndFetch(Animals.class);
+        }
+    }
 }
