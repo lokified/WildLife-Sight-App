@@ -3,7 +3,7 @@ import org.sql2o.Connection;
 import java.util.List;
 import java.util.Objects;
 
-public class EndangeredAnimals extends WildlifeAnimal {
+public class EndangeredAnimals extends WildlifeAnimal implements DatabaseManagement {
 
     public static final String DATABASE_TYPE = "endangered";
     private String health;
