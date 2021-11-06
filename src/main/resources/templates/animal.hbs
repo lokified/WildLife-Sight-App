@@ -1,0 +1,13 @@
+{{#partial "content"}}
+    <h1>Wildlife Tracker</h1>
+
+    <h3>Animals</h3>
+    {{#each animals}}
+        <p>{{name}}</p>
+    {{/each}}
+
+
+    <a href="/en-animal-form" class="btn btn-success btn-sm">Add endangered animal</a>
+
+{{/partial}}
+{{> layout.hbs}}

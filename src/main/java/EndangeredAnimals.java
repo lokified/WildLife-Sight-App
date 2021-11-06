@@ -9,11 +9,10 @@ public class EndangeredAnimals extends WildlifeAnimal implements DatabaseManagem
     private String health;
     private String age;
 
-    public EndangeredAnimals(String name, String health, String age, int sightingId) {
+    public EndangeredAnimals(String name, String health, String age) {
         this.name = name;
         this.health = health;
         this.age = age;
-        this.sighting_Id = sighting_Id;
         type = DATABASE_TYPE;
     }
 
@@ -41,13 +40,12 @@ public class EndangeredAnimals extends WildlifeAnimal implements DatabaseManagem
     }
 
 
-
+    @Override
     public void save() {
         try(Connection conn = DB.sql2o.open()) {
-           String sql = "INSERT INTO animals (name,sighting_Id, type, health, age) VALUES (:name, :sighting_Id, :type, :health, :age)";
+           String sql = "INSERT INTO animals (name, type, health, age) VALUES (:name, :type, :health, :age)";
            this.id = (int) conn.createQuery(sql,true)
                    .addParameter("name",this.name)
-                   .addParameter("sighting_Id",this.sighting_Id)
                    .addParameter("type",this.type)
                    .addParameter("health",this.health)
                    .addParameter("age",this.age)
@@ -75,12 +73,11 @@ public class EndangeredAnimals extends WildlifeAnimal implements DatabaseManagem
         }
     }
 
-    public void update(int id, String newName, int newSightingId, String newHealth, String newAge) {
+    public void update(int id, String newName, String newHealth, String newAge) {
         try(Connection con = DB.sql2o.open()) {
-            String sql = "UPDATE animals SET name = :name, sightingId = :sightingId, health = :health, age = :age WHERE id = :id";
+            String sql = "UPDATE animals SET name = :name, health = :health, age = :age WHERE id = :id";
             con.createQuery(sql)
                     .addParameter("name", newName)
-                    .addParameter("sightingId",newSightingId)
                     .addParameter("health", newHealth)
                     .addParameter("age", newAge)
                     .addParameter("id", id)

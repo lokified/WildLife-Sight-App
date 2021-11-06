@@ -6,9 +6,8 @@ public class Animals extends WildlifeAnimal  implements DatabaseManagement{
 
     public static final String DATABASE_TYPE = "Not-endangered";
 
-    public Animals(String name, int sighting_Id) {
+    public Animals(String name) {
         this.name = name;
-        this.sighting_Id = sighting_Id;
         type = DATABASE_TYPE;
     }
 
@@ -20,24 +19,13 @@ public class Animals extends WildlifeAnimal  implements DatabaseManagement{
           .executeAndFetch(Animals.class);
         }
     }
-    public void save() {
-        try(Connection conn = DB.sql2o.open()) {
-            String sql = "INSERT INTO animals (name,sighting_Id,type) VALUES (:name, :sighting_Id, :type)";
-            this.id = (int) conn.createQuery(sql,true)
-                    .addParameter("name",this.name)
-                    .addParameter("sighting_Id",this.sighting_Id)
-                    .addParameter("type",this.type)
-                    .executeUpdate()
-                    .getKey();
-        }
-    }
 
-    public void update(int id, String newName, int newSighting_Id) {
-        String sql = "UPDATE animals SET (name,sighting_Id) = (:name, :sighting_Id) WHERE id = :id";
+
+    public void update(int id, String newName) {
+        String sql = "UPDATE animals SET name = :name WHERE id = :id";
         try(Connection conn = DB.sql2o.open()) {
             conn.createQuery(sql)
                     .addParameter("name",newName)
-                    .addParameter("sighting_Id",newSighting_Id)
                     .addParameter("id",id)
                     .executeUpdate();
         }

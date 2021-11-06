@@ -2,7 +2,7 @@ import org.sql2o.Connection;import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
-public class Sighting {
+public class Sighting implements DatabaseManagement{
 
     private int animal_Id;
     private String location;
@@ -101,6 +101,15 @@ public class Sighting {
             conn.createQuery(sql)
                     .addParameter("id",this.id)
                     .executeUpdate();
+        }
+    }
+
+    public static List<Sighting> allByAnimals (int animal_Id) {
+        try (Connection conn = DB.sql2o.open()){
+            String sql = "SELECT * FROM sightings WHERE animal_Id = :animal_Id";
+            return conn.createQuery(sql)
+                    .addParameter("animal_Id",animal_Id)
+                    .executeAndFetch(Sighting.class);
         }
     }
 }

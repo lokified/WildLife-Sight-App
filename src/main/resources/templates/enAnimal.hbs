@@ -1,0 +1,14 @@
+{{#partial "content"}}
+
+    <h3>Endangered Animals</h3>
+    {{#each enAnimals}}
+        <p>Name:{{name}}</p>
+        <p>Age:{{age}}</p>
+        <p>Health:{{health}}</p>
+
+    {{/each}}
+
+    <a href="/animal-form" class="btn btn-success btn-sm">Add animal</a>
+
+{{/partial}}
+{{> layout.hbs}}
