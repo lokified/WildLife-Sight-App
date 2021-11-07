@@ -6,6 +6,8 @@
         <div class="border border-1 p-3 m-2">
              <h1>{{name}}</h1>
             <p class="text-info">{{type}}</p>
+            <a class="btn btn-info btn-sm" href="/animals/{{id}}/update">Edit</a>
+            <a class="btn btn-danger btn-sm" href="/animals/{{id}}/delete">Delete</a>
         </div>
     {{/each}}
 
@@ -15,7 +17,8 @@
             <p>Age:{{age}}</p>
             <p>Health:{{health}}</p>
             <p class="text-info">{{type}}</p>
-
+            <a class="btn btn-info btn-sm" href="/enAnimals/{{id}}/update">Edit</a>
+            <a class="btn btn-danger btn-sm" href="/animals/{{id}}/delete">Delete</a>
         </div>
 
 

@@ -96,5 +96,60 @@ public class App {
             model.put("sightings",allSightings);
             return new ModelAndView(model,"sightings.hbs");
         }, new HandlebarsTemplateEngine() );
+
+        //show form to update animals
+        get("/animals/:id/update",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            int idOfAnimal = Integer.parseInt(request.params("id"));
+
+            Animals editAnimal = Animals.find(idOfAnimal);
+            model.put("editAnimal",editAnimal);
+            return new ModelAndView(model,"animal-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //process form to update
+        post("/animals/:id/update",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            String newName = request.queryParams("name");
+
+            int idOfAnimal = Integer.parseInt(request.params(":id"));
+            Animals editAnimal = Animals.find(idOfAnimal);
+            editAnimal.update(idOfAnimal,newName);
+            return new ModelAndView(model,"success.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //deletes an animal
+        post("/animals/:id/delete",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            int idOfAnimal = Integer.parseInt(request.params("id"));
+            Animals animal = Animals.find(idOfAnimal);
+            animal.delete();
+            EndangeredAnimals enAnimal = EndangeredAnimals.find(idOfAnimal);
+            enAnimal.delete();
+            return new ModelAndView(model,"success-del.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //show form to update endangered animals
+        get("/enAnimals/:id/update",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            int idOfAnimal = Integer.parseInt(request.params("id"));
+
+            EndangeredAnimals editEnAnimal = EndangeredAnimals.find(idOfAnimal);
+            model.put("editEnAnimal",editEnAnimal);
+            return new ModelAndView(model,"en-animal-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //process form to update endangered animals
+        post("/enAnimals/:id/update",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            String newName = request.queryParams("name");
+            String newHealth = request.queryParams("health");
+            String newAge = request.queryParams("age");
+
+            int idOfAnimal = Integer.parseInt(request.params(":id"));
+            EndangeredAnimals editAnimal = EndangeredAnimals.find(idOfAnimal);
+            editAnimal.update(idOfAnimal,newName,newHealth,newAge);
+            return new ModelAndView(model,"success.hbs");
+        }, new HandlebarsTemplateEngine());
     }
 }

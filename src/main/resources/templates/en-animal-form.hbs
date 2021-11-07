@@ -1,21 +1,41 @@
 {{#partial "content"}}
-    <h1>Add an Endagered  animal</h1>
-    <form action="/en-animal-form/new" method="post">
-        <label for="name">Enter name</label><br>
-        <input type="text" id="name" name="name"><br>
-        <label for="health">Choose health status</label><br>
-        <select id="health" name="health"><br>
-            <option>healthy</option>
-            <option>ill</option>
-            <option>okay</option>
-        </select><br>
-        <label for="age">Choose age</label><br>
-        <select id="age" name="age">
-            <option>newborn</option>
-            <option>young</option>
-            <option>adult</option>
-        </select><br>
-        <button type="submit">Add</button>
+    <h1>Add an Endangered  animal</h1>
+    {{#if editEnAnimal}}
+        <h2>Edit</h2>
+        <form action="/enAnimals/{{editEnAnimal.id}}/update" method="post">
+            <label for="name">Enter name</label><br>
+            <input type="text" id="name" name="name" value="{{editEnAnimal.name}}"><br>
+            <label for="health">Choose health status</label><br>
+            <select id="health" name="health"><br>
+                <option>healthy</option>
+                <option>ill</option>
+                <option>okay</option>
+            </select><br>
+            <label for="age">Choose age</label><br>
+            <select id="age" name="age">
+                <option>newborn</option>
+                <option>young</option>
+                <option>adult</option>
+            </select><br>
+            <button class="btn btn-success btn-sm" type="Edit">Update</button>
+    {{else}}
+        <form action="/en-animal-form/new" method="post">
+            <label for="name">Enter name</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="health">Choose health status</label><br>
+            <select id="health" name="health"><br>
+                <option>healthy</option>
+                <option>ill</option>
+                <option>okay</option>
+            </select><br>
+            <label for="age">Choose age</label><br>
+            <select id="age" name="age">
+                <option>newborn</option>
+                <option>young</option>
+                <option>adult</option>
+            </select><br>
+            <button class="btn btn-success btn-sm"  type="submit">Add</button>
+    {{/if}}
     </form>
 
 {{/partial}}

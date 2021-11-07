@@ -1,8 +1,18 @@
 {{#partial "content"}}
-    <h1>Add an animal</h1>
-    <form action="/animal-form/new" method="post">
-        <input type="text" id="name" name="name">
-        <button type="submit">Add</button>
+    {{#if editAnimal}}
+        <h1>EDIT animal</h1>
+
+        <form action="/animals/{{editAnimal.id}}/update" method="post">
+            <input type="text" id="name" name="name" value="{{editAnimal.name}}">
+            <button type="submit">Update</button>
+
+    {{else}}
+            <h1>Add animal</h1>
+            <form action="/animal-form/new" method="post">
+                <input type="text" id="name" name="name">
+                <button type="submit">Add</button>
+
+    {{/if}}
     </form>
 
 {{/partial}}
