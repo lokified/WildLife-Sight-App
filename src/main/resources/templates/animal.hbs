@@ -1,18 +1,20 @@
 {{#partial "content"}}
-    <h1>Wildlife Tracker</h1>
-
     <h3>Animals</h3>
     {{#each animals}}
-        <div class="border border-1 p-3 m-2">
-             <h1>{{name}}</h1>
-            <p class="text-info">{{type}}</p>
-            <a class="btn btn-info btn-sm" href="/animals/{{id}}/update">Edit</a>
-            <a class="btn btn-danger btn-sm" href="/animals/{{id}}/delete">Delete</a>
+        <div class="result">
+            <div class="border border-1 p-3 m-2 animal">
+                <h1>{{name}}</h1>
+                <p class="text-info">{{type}}</p>
+                <a class="btn btn-info btn-sm" href="/animals/{{id}}/update">Edit</a>
+                <a class="btn btn-danger btn-sm" href="/animals/{{id}}/delete">Delete</a>
+            </div>
         </div>
+
     {{/each}}
 
     {{#each enAnimals}}
-        <div class="border border-1 p-3 m-2">
+        <div class="result">
+        <div class="border border-1 p-3 m-2 enamal">
             <h1>{{name}}</h1>
             <p>Age:{{age}}</p>
             <p>Health:{{health}}</p>
@@ -20,13 +22,16 @@
             <a class="btn btn-info btn-sm" href="/enAnimals/{{id}}/update">Edit</a>
             <a class="btn btn-danger btn-sm" href="/animals/{{id}}/delete">Delete</a>
         </div>
+        </div>
 
 
     {{/each}}
 
-
+<div class="adds">
     <a href="/en-animal-form" class="btn btn-success btn-sm">Add endangered animal</a>
     <a href="/animal-form" class="btn btn-success btn-sm">Add animal</a>
+</div>
+
 
 
 {{/partial}}

@@ -1,8 +1,9 @@
 {{#partial "content"}}
-    <h1>Add an Endangered  animal</h1>
+
     {{#if editEnAnimal}}
-        <h2>Edit</h2>
-        <form action="/enAnimals/{{editEnAnimal.id}}/update" method="post">
+
+        <form action="/enAnimals/{{editEnAnimal.id}}/update" method="post" class="form">
+            <h1>Edit</h1>
             <label for="name">Enter name</label><br>
             <input type="text" id="name" name="name" value="{{editEnAnimal.name}}"><br>
             <label for="health">Choose health status</label><br>
@@ -19,7 +20,8 @@
             </select><br>
             <button class="btn btn-success btn-sm" type="Edit">Update</button>
     {{else}}
-        <form action="/en-animal-form/new" method="post">
+        <form action="/en-animal-form/new" method="post" class="form">
+            <h1>Add an Endangered  animal</h1>
             <label for="name">Enter name</label><br>
             <input type="text" id="name" name="name"><br>
             <label for="health">Choose health status</label><br>

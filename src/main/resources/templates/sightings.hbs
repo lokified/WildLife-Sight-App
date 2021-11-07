@@ -2,7 +2,7 @@
 
     <h3>Sightings</h3>
     {{#each sightings}}
-        <div class="border border-1 p-3 m-2">
+        <div class="border border-1 p-3 m-2 bg-dark">
 
             <p>Animal Id : {{id}}</p>
             <p>Location : {{location}}</p>
@@ -14,11 +14,11 @@
 
         </div>
     {{/each}}
-
-    <a href="/sighting-form" class="btn btn-success btn-sm">Record Sighting</a> <br>
-
+<div class="adds">
     <a href="/en-animal-form" class="btn btn-success btn-sm">Add endangered animal</a>
     <a href="/animal-form" class="btn btn-success btn-sm">Add animal</a>
+</div>
+
 
 
 {{/partial}}
