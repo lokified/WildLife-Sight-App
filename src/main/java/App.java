@@ -78,7 +78,7 @@ public class App {
         //process sighting form
         post("/sighting-form/new",(request, response) -> {
             Map<String,Object> model = new HashMap<String, Object>();
-            int animalId = Integer.parseInt(request.queryParams("animal"));
+            String animalId = request.queryParams("animal");
             String location = request.queryParams("location");
             String rangerName = request.queryParams("rangerName");
 

@@ -4,20 +4,20 @@ import java.util.Objects;
 
 public class Sighting implements DatabaseManagement{
 
-    private int animal_Id;
+    private String animal_Id;
     private String location;
     private String rangerName;
     private int id;
     private Timestamp timeSeen;
 
-    public Sighting(int animal_Id, String location, String rangerName) {
+    public Sighting(String animal_Id, String location, String rangerName) {
         this.animal_Id = animal_Id;
         this.location = location;
         this.rangerName = rangerName;
 
     }
 
-    public int getAnimal_Id() {
+    public String getAnimal_Id() {
         return animal_Id;
     }
 
@@ -42,8 +42,8 @@ public class Sighting implements DatabaseManagement{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sighting sighting = (Sighting) o;
-        return animal_Id == sighting.animal_Id &&
-                id == sighting.id &&
+        return id == sighting.id &&
+                Objects.equals(animal_Id, sighting.animal_Id) &&
                 Objects.equals(location, sighting.location) &&
                 Objects.equals(rangerName, sighting.rangerName) &&
                 Objects.equals(timeSeen, sighting.timeSeen);
@@ -83,7 +83,7 @@ public class Sighting implements DatabaseManagement{
         }
     }
 
-    public void update(int id, int newAnimal_id, String newLocation, String newRangerName) {
+    public void update(int id, String newAnimal_id, String newLocation, String newRangerName) {
         String sql = "UPDATE sightings SET (animal_Id,location,rangerName) = (:animal_Id, :location, :rangerName) WHERE id = :id";
         try(Connection conn = DB.sql2o.open()) {
             conn.createQuery(sql)
