@@ -1,6 +1,10 @@
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 public class SightingTest {
@@ -92,5 +96,15 @@ public class SightingTest {
         testSight.save();
         testSight.delete();
         assertEquals(null,Sighting.find(testSight.getId()));
+    }
+
+    @Test
+    public void Sighting_recordsTimeSeenCorrectly() {
+        Sighting testSight = new Sighting("Lion","Zone A","Songyam");
+        testSight.save();
+        testSight.seen();
+        Timestamp savedSight = Sighting.find(testSight.getId()).getTimeSeen();
+        Timestamp rightNow = new Timestamp(new Date().getTime());
+        assertEquals(DateFormat.getDateTimeInstance().format(rightNow), DateFormat.getDateTimeInstance().format(savedSight));
     }
 }

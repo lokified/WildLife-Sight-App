@@ -84,6 +84,7 @@ public class App {
 
             Sighting sighting = new Sighting(animalId, location, rangerName);
             sighting.save();
+            sighting.seen();
             model.put("sightings",sighting);
             return new ModelAndView(model,"success.hbs");
 

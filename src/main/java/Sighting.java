@@ -33,8 +33,8 @@ public class Sighting implements DatabaseManagement{
         return id;
     }
 
-    public Timestamp getTimeSeen() {
-        return timeSeen;
+    public String getTimeSeen() {
+        return String.format("%1$TD %1$TR", timeSeen);
     }
 
     @Override
@@ -100,6 +100,16 @@ public class Sighting implements DatabaseManagement{
             String sql = "DELETE FROM sightings WHERE id = :id";
             conn.createQuery(sql)
                     .addParameter("id",this.id)
+                    .executeUpdate();
+        }
+    }
+
+    public void seen() {
+        try(Connection conn = DB.sql2o.open()) {
+            String sql = "UPDATE  sightings  SET timeSeen = now() WHERE id = :id";
+            conn.createQuery(sql)
+                    .addParameter("id",this.id)
+                    .throwOnMappingFailure(false)
                     .executeUpdate();
         }
     }
