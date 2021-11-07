@@ -119,13 +119,11 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
         //deletes an animal
-        post("/animals/:id/delete",(request, response) -> {
+        get("/animals/:id/delete",(request, response) -> {
             Map<String,Object> model = new HashMap<String, Object>();
             int idOfAnimal = Integer.parseInt(request.params("id"));
             Animals animal = Animals.find(idOfAnimal);
             animal.delete();
-            EndangeredAnimals enAnimal = EndangeredAnimals.find(idOfAnimal);
-            enAnimal.delete();
             return new ModelAndView(model,"success-del.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -150,6 +148,41 @@ public class App {
             EndangeredAnimals editAnimal = EndangeredAnimals.find(idOfAnimal);
             editAnimal.update(idOfAnimal,newName,newHealth,newAge);
             return new ModelAndView(model,"success.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //show form to update sightings
+        get("/sightings/:id/update",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            List<Animals> all = Animals.allAnimals();
+            model.put("animals",all);
+            int idOfSight = Integer.parseInt(request.params("id"));
+
+            Sighting editSight = Sighting.find(idOfSight);
+            model.put("editSight",editSight);
+            return new ModelAndView(model,"sighting-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //process sighting form
+        post("/sightings/:id/update",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            String newAnimalId = request.queryParams("animal");
+            String newLocation = request.queryParams("location");
+            String newRangerName = request.queryParams("rangerName");
+            int idOfSight = Integer.parseInt(request.params("id"));
+
+            Sighting editSight = Sighting.find(idOfSight);
+            editSight.update(idOfSight,newAnimalId, newLocation, newRangerName);
+            return new ModelAndView(model,"success.hbs");
+
+        }, new HandlebarsTemplateEngine());
+
+        //deletes sighting
+        get("/sightings/:id/delete",(request, response) -> {
+            Map<String,Object> model = new HashMap<String, Object>();
+            int idOfSight = Integer.parseInt(request.params("id"));
+            Sighting deleteSight = Sighting.find(idOfSight);
+            deleteSight.delete();
+            return new ModelAndView(model,"success-del.hbs");
         }, new HandlebarsTemplateEngine());
     }
 }

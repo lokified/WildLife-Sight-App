@@ -4,9 +4,13 @@
     {{#each sightings}}
         <div class="border border-1 p-3 m-2">
 
-            <p>Animal Id : {{animalId}}</p>
+            <p>Animal Id : {{id}}</p>
             <p>Location : {{location}}</p>
             <p>Ranger Name : {{rangerName}}</p>
+
+            <a class="btn btn-info btn-sm" href="/sightings/{{id}}/update">Edit</a>
+            <a class="btn btn-danger btn-sm" href="/sightings/{{id}}/delete">Delete</a>
+
         </div>
     {{/each}}
 
