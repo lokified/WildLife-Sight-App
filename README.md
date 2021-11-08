@@ -22,12 +22,12 @@ This is application that tracks animal in two categories, animal and endagered a
 * Open with the IDE and run it using Gradle.
 
 ## Database setup
-1. Type in psql.
-Run the commands.
-CREATE DATABASE wildlife_tracker;
-CREATE TABLE animals (id SERIAL PRIMARY KEY, name VARCHAR, type VARCHAR, health VARCHAR, age VARCHAR);
-CREATE TABLE sightings (id SERIAL PRIMARY KEY, animal_Id VARCHAR, location VARCHAR, rangerName VARCHAR, timeSeen TIMESTAMP);
-CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;
+### Type in psql.
+Run these commands.
+* CREATE DATABASE wildlife_tracker;
+* CREATE TABLE animals (id SERIAL PRIMARY KEY, name VARCHAR, type VARCHAR, health VARCHAR, age VARCHAR);
+* CREATE TABLE sightings (id SERIAL PRIMARY KEY, animal_Id VARCHAR, location VARCHAR, rangerName VARCHAR, timeSeen TIMESTAMP);
+* CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;
 
 ## Known Bugs
 * None.
