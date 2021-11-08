@@ -33,8 +33,8 @@ public class Sighting implements DatabaseManagement{
         return id;
     }
 
-    public String getTimeSeen() {
-        return String.format("%1$TD %1$TR", timeSeen);
+    public Timestamp getTimeSeen() {
+        return timeSeen;
     }
 
     @Override
