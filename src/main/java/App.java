@@ -2,13 +2,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import static spark.Spark.*;
 
 public class App {
+<<<<<<< HEAD
 
+=======
+>>>>>>> exceptions
     static int getHerokuAssignedPort() {
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
