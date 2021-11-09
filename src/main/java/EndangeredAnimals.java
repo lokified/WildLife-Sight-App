@@ -10,6 +10,10 @@ public class EndangeredAnimals extends WildlifeAnimal implements DatabaseManagem
     private String age;
 
     public EndangeredAnimals(String name, String health, String age) {
+        if (name.equals(" ")) {
+            throw new IllegalArgumentException("Please enter a name.");
+
+        }
         this.name = name;
         this.health = health;
         this.age = age;

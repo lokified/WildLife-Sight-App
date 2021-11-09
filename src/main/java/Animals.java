@@ -7,6 +7,10 @@ public class Animals extends WildlifeAnimal  implements DatabaseManagement{
     public static final String DATABASE_TYPE = "Not-endangered";
 
     public Animals(String name) {
+        if (name.equals(" ")) {
+            throw new IllegalArgumentException("Please enter a name.");
+
+        }
         this.name = name;
         type = DATABASE_TYPE;
     }

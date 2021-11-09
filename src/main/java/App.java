@@ -40,10 +40,14 @@ public class App {
         post("/animal-form/new",(request, response) -> {
             Map<String,Object> model = new HashMap<String, Object>();
 
-            String name = request.queryParams("name");
-            Animals newAnimal = new Animals(name);
-            newAnimal.save();
-            model.put("animals",newAnimal);
+            try {
+                String name = request.queryParams("name");
+                Animals newAnimal = new Animals(name);
+                newAnimal.save();
+                model.put("animals", newAnimal);
+            }catch (IllegalArgumentException exception){
+                System.out.println("Form cannot be empty");
+            }
             return new ModelAndView(model,"success.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -57,13 +61,17 @@ public class App {
         post("/en-animal-form/new",(request, response) -> {
             Map<String,Object> model = new HashMap<String, Object>();
 
-            String name = request.queryParams("name");
-            String health = request.queryParams("health");
-            String age = request.queryParams("age");
+            try {
+                String name = request.queryParams("name");
+                String health = request.queryParams("health");
+                String age = request.queryParams("age");
 
-            EndangeredAnimals newEndangeredAnimal = new EndangeredAnimals(name,health,age);
-            newEndangeredAnimal.save();
-            model.put("enAnimals",newEndangeredAnimal);
+                EndangeredAnimals newEndangeredAnimal = new EndangeredAnimals(name, health, age);
+                newEndangeredAnimal.save();
+                model.put("enAnimals", newEndangeredAnimal);
+            }catch (IllegalArgumentException exception){
+                System.out.println("Form cannot be empty");
+            }
             return new ModelAndView(model,"success.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -89,14 +97,18 @@ public class App {
         //process sighting form
         post("/sighting-form/new",(request, response) -> {
             Map<String,Object> model = new HashMap<String, Object>();
-            String animalId = request.queryParams("animal");
-            String location = request.queryParams("location");
-            String rangerName = request.queryParams("rangerName");
+            try {
+                String animalId = request.queryParams("animal");
+                String location = request.queryParams("location");
+                String rangerName = request.queryParams("rangerName");
 
-            Sighting sighting = new Sighting(animalId, location, rangerName);
-            sighting.save();
-            sighting.seen();
-            model.put("sightings",sighting);
+                Sighting sighting = new Sighting(animalId, location, rangerName);
+                sighting.save();
+                sighting.seen();
+                model.put("sightings", sighting);
+            }catch (IllegalArgumentException exception) {
+                System.out.println("Form cannot be empty");
+            }
             return new ModelAndView(model,"success.hbs");
 
         }, new HandlebarsTemplateEngine());

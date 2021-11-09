@@ -1,4 +1,5 @@
-import org.sql2o.Connection;import java.sql.Timestamp;
+import org.sql2o.Connection;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +12,10 @@ public class Sighting implements DatabaseManagement{
     private Timestamp timeSeen;
 
     public Sighting(String animal_Id, String location, String rangerName) {
+        if (rangerName.equals(" ")) {
+            throw new IllegalArgumentException("Please enter a name.");
+
+        }
         this.animal_Id = animal_Id;
         this.location = location;
         this.rangerName = rangerName;
