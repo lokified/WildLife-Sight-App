@@ -2,7 +2,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
